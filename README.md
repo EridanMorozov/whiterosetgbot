@@ -1,1 +1,1 @@
-# whiterosetgbot
+# WhiteRose TG Bot
