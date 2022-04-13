@@ -1,1 +1,1 @@
-# WhiteRose TG Bot
+# BurningRose Translator (Telegram bot for learning English)
