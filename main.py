@@ -28,8 +28,8 @@ def main():
     # вляется название команды.
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("Translate", translate))
-    dp.add_handler(CommandHandler("address", address))
-    dp.add_handler(CommandHandler("phone", phone))
+    dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("select_lvl", lvl))
     dp.add_handler(CommandHandler("site", site))
     dp.add_handler(CommandHandler("work_time", work_time))
     dp.add_handler(CommandHandler("close", close_keyboard))  # закрытие клавиатуры
@@ -53,7 +53,8 @@ def main():
 # Их сигнатура и поведение аналогичны обработчикам текстовых сообщений.
 def start(update, context):
     update.message.reply_text(
-        "Я - бот переводчик! Я помогу тебе в изучении английского языка!",
+        "Я - бот переводчик! Я помогу тебе в изучении английского языка!"
+        " Напиши /help для получения справки о работе с ботом.",
         reply_markup=markup
     )
 
@@ -63,13 +64,16 @@ def translate(update, context):
         "Я пока не умею переводить... Я только ваше эхо.")
 
 
-def address(update, context):
+def help(update, context):
     update.message.reply_text(
-        "Адрес: г. Москва, ул. Льва Толстого, 16")
+        "Справка по кнопкам:"
+        " /translate - позволяет перевести предложение"
+        " /selectlvl - дает вам выбрать уровень знания английского (А2, В1)"
+        " /phrasal_verbs | /prepositional_phrases - вывод списка устойчивых выражений.")
 
 
-def phone(update, context):
-    update.message.reply_text("Телефон: +7(495)776-3030")
+def lvl(update, context):
+    update.message.reply_text("Выберите ваш уровень в кнопках снизу:")
 
 
 def site(update, context):
@@ -89,8 +93,8 @@ def close_keyboard(update, context):
     )
 
 
-reply_keyboard = [['/translate', '/phone'],
-                  ['/site', '/work_time']]
+reply_keyboard = [['/translate', '/help'],
+                  ['/select_lvl']]
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
 
 # Запускаем функцию main() в случае запуска скрипта.
