@@ -27,7 +27,7 @@ def main():
     # Первым параметром конструктора CommandHandler я
     # вляется название команды.
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("Translate", translate))
     dp.add_handler(CommandHandler("address", address))
     dp.add_handler(CommandHandler("phone", phone))
     dp.add_handler(CommandHandler("site", site))
@@ -53,14 +53,14 @@ def main():
 # Их сигнатура и поведение аналогичны обработчикам текстовых сообщений.
 def start(update, context):
     update.message.reply_text(
-        "Я бот-справочник. Какая информация вам нужна?",
+        "Я - бот переводчик! Я помогу тебе в изучении английского языка!",
         reply_markup=markup
     )
 
 
-def help(update, context):
+def translate(update, context):
     update.message.reply_text(
-        "Я пока не умею помогать... Я только ваше эхо.")
+        "Я пока не умею переводить... Я только ваше эхо.")
 
 
 def address(update, context):
@@ -89,7 +89,7 @@ def close_keyboard(update, context):
     )
 
 
-reply_keyboard = [['/address', '/phone'],
+reply_keyboard = [['/translate', '/phone'],
                   ['/site', '/work_time']]
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
 

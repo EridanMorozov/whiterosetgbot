@@ -18,7 +18,7 @@ def echo(update, context):
 def main():
     # Создаём объект updater.
     # Вместо слова "TOKEN" надо разместить полученный от @BotFather токен
-    updater = Updater('5234576861:AAFGhtHrF_Ezl6RxH263jMZa2TFIs-n-vVA', use_context=True)
+    updater = Updater('5264916178:AAFVw-7R1T_H7b-_tgfwoGby3p6YLahvgoY', use_context=True)
 
     # Получаем из него диспетчер сообщений.
     dp = updater.dispatcher
@@ -53,7 +53,7 @@ def main():
 # Их сигнатура и поведение аналогичны обработчикам текстовых сообщений.
 def start(update, context):
     update.message.reply_text(
-        "Я бот-справочник. Какая информация вам нужна?",
+        "Я - бот переводчик! Напиши мне любое предложение или слово на английском или русском языках и я его переведу!",
         reply_markup=markup
     )
 
