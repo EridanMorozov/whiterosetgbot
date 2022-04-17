@@ -16,3 +16,6 @@ class Education(SqlAlchemyBase):
     content = sqlalchemy.Column(sqlalchemy.String)
     translate_content = sqlalchemy.Column(sqlalchemy.String)
     photo = sqlalchemy.Column(sqlalchemy.String)
+
+    def add_ed(self, lvl, conten, trans_conten, photo):
+        pass

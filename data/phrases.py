@@ -7,3 +7,7 @@ class Phrase(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     content = sqlalchemy.Column(sqlalchemy.String)
+    translate_content = sqlalchemy.Column(sqlalchemy.String)
+
+    def add_phrase(self, content, trans_content):
+        pass
