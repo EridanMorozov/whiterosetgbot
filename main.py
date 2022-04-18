@@ -24,8 +24,8 @@ def main():
     dp = updater.dispatcher
     # Зарегистрируем их в диспетчере рядом
     # с регистрацией обработчиков текстовых сообщений.
-    # Первым параметром конструктора CommandHandler я
-    # вляется название команды.
+    # Первым параметром конструктора CommandHandler
+    # Является название команды.
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("Translate", translate))
     dp.add_handler(CommandHandler("help", help))
