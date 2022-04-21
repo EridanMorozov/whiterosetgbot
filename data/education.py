@@ -1,5 +1,6 @@
 import sqlalchemy
-from .db_session import SqlAlchemyBase
+from db_session import SqlAlchemyBase
+import db_session
 # A1 - начальный
 # A2 - ниже среднего
 # B1 - средний
@@ -15,7 +16,25 @@ class Education(SqlAlchemyBase):
     lvl = sqlalchemy.Column(sqlalchemy.String)
     content = sqlalchemy.Column(sqlalchemy.String)
     translate_content = sqlalchemy.Column(sqlalchemy.String)
-    photo = sqlalchemy.Column(sqlalchemy.String)
+    theme = sqlalchemy.Column(sqlalchemy.String)
 
-    def add_ed(self, lvl, conten, trans_conten, photo):
-        pass
+    def add_ed(self, lvl, content, trans_content, theme):
+        ed = Education()
+        ed.lvl = lvl
+        ed.content = content
+        ed.translate_content = trans_content
+        ed.theme = theme
+        session.add(ed)
+        session.commit()
+
+
+db_session.global_init("db/blogs.db")
+session = db_session.create_session()
+ed = Education()
+ed.add_ed('A1', 'World', 'Мир', 'The world around us')
+ed.add_ed('A1', 'Wind', 'Ветер', 'The world around us')
+ed.add_ed('A1', 'East', 'Восток', 'The world around us')
+ed.add_ed('A1', 'West', 'Запад', 'The world around us')
+ed.add_ed('A1', 'North', 'Север', 'The world around us')
+ed.add_ed('A1', 'South', 'Юг', 'The world around us')
+

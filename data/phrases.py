@@ -1,5 +1,6 @@
 import sqlalchemy
-from .db_session import SqlAlchemyBase
+from db_session import SqlAlchemyBase
+import db_session
 
 
 class Phrase(SqlAlchemyBase):
@@ -10,4 +11,10 @@ class Phrase(SqlAlchemyBase):
     translate_content = sqlalchemy.Column(sqlalchemy.String)
 
     def add_phrase(self, content, trans_content):
-        pass
+        db_session.global_init("db/blogs.db")
+        session = db_session.create_session()
+        ph = Phrase()
+        ph.content = content
+        ph.translate_content = trans_content
+        session.add(ph)
+        session.commit()

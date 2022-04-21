@@ -4,9 +4,10 @@ from telebot import types  # для указание типов
 import config
 import logging
 
-logging.basicConfig(format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s")
+# logging.basicConfig(format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s")
+logger = logging.getLogger(__name__)
 bot = telebot.TeleBot(config.token)
-print('start')
+
 
 
 @bot.message_handler(commands=['start'])
