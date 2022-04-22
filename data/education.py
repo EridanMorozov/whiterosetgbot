@@ -1,6 +1,5 @@
 import sqlalchemy
-from db_session import SqlAlchemyBase
-import db_session
+from . import db_session
 # A1 - начальный
 # A2 - ниже среднего
 # B1 - средний
@@ -9,7 +8,7 @@ import db_session
 # C2 - профессиональный
 
 
-class Education(SqlAlchemyBase):
+class Education(db_session.SqlAlchemyBase):
     __tablename__ = 'education'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
@@ -28,13 +27,13 @@ class Education(SqlAlchemyBase):
         session.commit()
 
 
-db_session.global_init("db/blogs.db")
-session = db_session.create_session()
-ed = Education()
-ed.add_ed('A1', 'World', 'Мир', 'The world around us')
-ed.add_ed('A1', 'Wind', 'Ветер', 'The world around us')
-ed.add_ed('A1', 'East', 'Восток', 'The world around us')
-ed.add_ed('A1', 'West', 'Запад', 'The world around us')
-ed.add_ed('A1', 'North', 'Север', 'The world around us')
-ed.add_ed('A1', 'South', 'Юг', 'The world around us')
+# db_session.global_init("db/blogs.db")
+# session = db_session.create_session()
+# ed = Education()
+# ed.add_ed('A1', 'World', 'Мир', 'The world around us')
+# ed.add_ed('A1', 'Wind', 'Ветер', 'The world around us')
+# ed.add_ed('A1', 'East', 'Восток', 'The world around us')
+# ed.add_ed('A1', 'West', 'Запад', 'The world around us')
+# ed.add_ed('A1', 'North', 'Север', 'The world around us')
+# ed.add_ed('A1', 'South', 'Юг', 'The world around us')
 

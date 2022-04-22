@@ -1,8 +1,8 @@
 import sqlalchemy
-from db_session import SqlAlchemyBase
+from . import db_session
 
 
-class Theme(SqlAlchemyBase):
+class Theme(db_session.SqlAlchemyBase):
     __tablename__ = 'themes'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)

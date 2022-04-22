@@ -1,3 +1,3 @@
-import phrases
-import education
-import themes
+from . import phrases
+from . import education
+from . import themes

@@ -1,9 +1,8 @@
 import sqlalchemy
-from db_session import SqlAlchemyBase
-import db_session
+from . import db_session
 
 
-class Phrase(SqlAlchemyBase):
+class Phrase(db_session.SqlAlchemyBase):
     __tablename__ = 'phrases'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
