@@ -11,8 +11,17 @@ logger = logging.getLogger(__name__)
 logging.info('start')
 bot = telebot.TeleBot(config.token)
 levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
+mods = ['test1', 'test2']
 testSystem = TestingSystem(bot)
 db_session.global_init("db/bot.db")
+
+
+def main_menu(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    button1 = types.KeyboardButton("👋 Поздороваться")
+    button2 = types.KeyboardButton("❓ Выбор уровня английского")
+    markup.add(button1, button2)
+    bot.send_message(message.chat.id, text="Вы вернулись в главное меню", reply_markup=markup)
 
 
 @bot.message_handler(commands=['start'])
@@ -42,9 +51,13 @@ def main_loop(message):
                                                " \n\n"
                                                "Режим '' помогает вам <do2>")
     elif message.text in levels:
-        lvl = message.text
         testSystem.choose_train(message)
-        testSystem.study_loop(message)
+
+    elif message.text in mods:
+        testSystem.test(message)
+
+    elif message.text == "Выйти" or message.text == "Вернуться в главное меню":
+        main_menu(message)
 
     elif message.text == "❓ Выбор уровня английского":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -58,15 +71,9 @@ def main_loop(message):
         markup.add(btn1, btn2, btn3, btn4, btn5, btn6, back)
         bot.send_message(message.chat.id, text="Выберите уровень знания английского", reply_markup=markup)
 
-    elif message.text == "Вернуться в главное меню":
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        button1 = types.KeyboardButton("👋 Поздороваться")
-        button2 = types.KeyboardButton("❓ Выбор уровня знания английского")
-        markup.add(button1, button2)
-        bot.send_message(message.chat.id, text="Вы вернулись в главное меню", reply_markup=markup)
     else:
         bot.send_message(message.chat.id,
-                         text="На такую команду я не запрограммировал.. Если не знаешь что спросить, то напиши "
+                         text="На такую команду я не запрограммирован... Если не знаешь что спросить, то напиши "
                               "'Помощь' или нажмите на соответствующую кнопку.")
 
 
