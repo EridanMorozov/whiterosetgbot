@@ -1,9 +1,13 @@
 # Импортируем необходимые классы.
+import random
+
 import telebot
+from telegram import Poll
 from telebot import types  # для указание типов
 import config
 import logging
 from data import db_session
+from data.education import Education
 from test_system import TestingSystem
 
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(funcName)s: %(lineno)d - %(message)s", level=logging.INFO)
@@ -12,6 +16,7 @@ logging.info('start')
 bot = telebot.TeleBot(config.token)
 levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
 mods = ['test1', 'test2']
+isTesting = False
 testSystem = TestingSystem(bot)
 db_session.global_init("db/bot.db")
 
@@ -37,6 +42,7 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def main_loop(message):
+    global isTesting
 
     if message.text == "🧭 Помощь" or message.text == 'Помощь':
         bot.send_message(message.chat.id, text="Выберите необходимую вам команду в выпадающем списке <text>.\n\n"
@@ -46,7 +52,7 @@ def main_loop(message):
                                                "Команда <translate mb, esli makar sdelaet> - <text>")
 
     elif message.text == "🧭 Помощь по режимам":
-        bot.send_message(message.chat.id, text=" Режим 'Изучение слов' направлен на то, чтобы помочь вам"
+        bot.send_message(message.chat.id, text=f" Режим 'Изучение слов' направлен на то, чтобы помочь вам"
                                                "выучить новые слова из самых разных сфер жизни в форме теста."
                                                " \n\n"
                                                "Режим '' помогает вам <do2>")
@@ -54,7 +60,14 @@ def main_loop(message):
         testSystem.choose_train(message)
 
     elif message.text in mods:
-        testSystem.test(message)
+        isTesting = True
+        session = db_session.create_session()
+        answers = list(session.query(Education.content).filter(Education.theme == 'The world around us').limit(4))
+        print(answers)
+        ans_id = random.randint(0, 3)
+        title = ''.join(answers[ans_id])
+        bot.send_poll(message.chat.id, type=Poll.QUIZ, question=f"Перевод слова '{title}'", options=["n", "mb"],
+                      correct_option_id=0, is_anonymous=False)
 
     elif message.text == "Выйти" or message.text == "Вернуться в главное меню":
         main_menu(message)
