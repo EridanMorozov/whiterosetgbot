@@ -118,13 +118,6 @@ def func(message):
                               "кнопку 'Помощь'.")
 
 
-@bot.message_handler(commands=['about'])
-def about(message):
-    bot.send_message(message.chat.id, 'Мене звати Остап. '
-                                      '\nЯ - Junior Python Developer. '
-                                      '\nTelegram - @Victoria1807 '
-                                      '\nGitHub - https://github.com/Victoria1807 '
-                                      '\nGmail - flamaster1807@gmail.com')
 
 
 bot.polling(none_stop=True)
